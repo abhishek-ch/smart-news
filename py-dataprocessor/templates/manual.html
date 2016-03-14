@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual Database Transactions</title>
+    <link href="../static/css/signup.css" rel="stylesheet">
+    <link href="../static/css/manual.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../static/css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <script src="../static/js/jquery-1.11.2.js"></script>
+    <script src="../static/js/jquery-ui-timepicker-addon.js"></script>
+    <script src="../static/js/moment.min.js"></script>
+    <script src="../static/js/bootstrap-datetimepicker.js"></script>
+
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/index.js"></script>
+    <script src="../static/js/manual.js"></script>
+
+
+
+    <script type=text/javascript>
+    $(function() {
+      $('a#calculate').bind('click', function() {
+        $.getJSON('/_add_numbers', {
+          a: 1,
+          b: 2
+        }, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+  </script>
+
+</head>
+<body>
+<div class="container">
+
+    <h3 class="text-muted">Manual Text Updates</h3>
+
+
+        <form  role="form" method='POST' action='/manual.html'>
+         <div class="row">
+            <div class="col-sm-6">
+                    <div class='input-group date' id='datetimepicker11'>
+                        <input id='selectedDate' type='text' name = 'thedate' class="form-control"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+
+                    </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker11').datetimepicker({
+                        daysOfWeekDisabled: []
+                    });
+                });
+            </script>
+             <p><button class="btn btn-lg btn-success" type="submit" name="submit" id="fetchText" value = "alias">Fetch</button>
+            </p>
+        </div>
+
+            {% for error in errors %}
+                <h4>{{ error }}</h4>
+            {% endfor %}
+
+        {% if title %}
+            <div class="row-fluid">
+              <div class="span4 offset4 text-center">
+                <button class="btn btn-lg btn-success" type="submit" name = "submit" value = 'swiperight'>1->2</button>
+                  <div class="row">
+                      <div class="col-sm-6">
+                      {% if navIndex %}
+                      <input id='currIndex' type='text' name = 'theinput' class="form-control" value={{ navIndex }}/>
+                      {% else %}
+                      <input id='currIndex' type='text' name = 'theinput' class="form-control" value="0"/>
+                      {% endif %}
+                      </div>
+                      {% if time %}
+                      <div class="col-sm-6">
+                          <input id='currFetchDate' type='text' name = 'thefetch' class="form-control" value={{ time }}/>
+                      </div>
+                      {% else %}
+                          <input id='currFetchDate' type='text' name = 'thefetch' class="form-control" value="bakwas"/>
+                      {% endif %}
+                  </div>
+
+                <button class="btn btn-lg btn-success" type="submit" name = "submit" value = 'swipeleft'>1<-2</button>
+              </div>
+        {% else %}
+            <p>Something is Very Wrong</p>
+        {% endif %}
+
+      {% if data %}
+        <div>
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+
+
+        <div class="modal-body">
+            {{ data }}
+        </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+          </ul>
+        </div>
+
+
+
+
+    <div class="form-group">
+        <label for="printPlatform" class="control-label col-xs-2">
+            Platform Ho:
+        </label>
+        <div class="col-xs-10">
+            <span id="printPlatform"></span>
+        </div>
+    </div>
+
+    <div class="clearfix"></div><br/>
+
+    <button class="btn btn-primary" id="SendRequest">
+        Send Request
+    </button>
+</div>
+
+{% endif %}
+
+
+</div>
+</form>
+
+</div>
+
+
+</body>
+</html>
